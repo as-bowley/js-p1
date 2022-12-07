@@ -67,5 +67,3 @@ const game = () => {
   checkWinner();
   resetGame();
 };
-
-game();
