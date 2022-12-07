@@ -11,7 +11,15 @@ function computerPlay() {
 function playerSelection() {
   let player = prompt(
     `Round ${round}: Please enter your choice of either Rock, Paper or Scissors:`
-  );
+  )
+    .toLowerCase()
+    .trim();
+
+  while (choices.indexOf(player) === -1) {
+    console.log("Choice not valid. Please try again.");
+    player = playerSelection();
+  }
+
   return player;
 }
 
@@ -57,15 +65,9 @@ function playRound(player, computer) {
 function game() {
   for (round; round < 6; round++) {
     const computerSelection = computerPlay();
-    let player = playerSelection();
+    const player = playerSelection();
 
-    while (choices.indexOf(player.toLowerCase()) === -1) {
-      player = playerSelection();
-    }
-
-    const playerSanitized = player.toLowerCase();
-
-    playRound(playerSanitized, computerSelection);
+    playRound(player, computerSelection);
   }
   return console.log(checkWinner());
 }
