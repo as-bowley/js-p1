@@ -36,16 +36,16 @@ function checkWinner() {
 
 function playRound(player, computer) {
   if (
-    (player == "rock" && computer == "scissors") ||
-    (player == "paper" && computer == "rock") ||
-    (player == "scissors" && computer == "paper")
+    (player === "rock" && computer === "scissors") ||
+    (player === "paper" && computer === "rock") ||
+    (player === "scissors" && computer === "paper")
   ) {
     playerScore = playerScore + 1;
     console.log(`Player wins Round ${round}`);
   } else if (
-    (player == "rock" && computer == "rock") ||
-    (player == "paper" && computer == "paper") ||
-    (player == "scissors" && computer == "scissors")
+    (player === "rock" && computer === "rock") ||
+    (player === "paper" && computer === "paper") ||
+    (player === "scissors" && computer === "scissors")
   ) {
     console.log(`Round ${round} is a draw`);
   } else {
