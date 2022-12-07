@@ -1,32 +1,40 @@
+let round = 1;
+let playerScore = 0;
+let computerScore = 0;
+
 const choices = ["rock", "paper", "scissors"];
 
 function computerPlay() {
   return choices[Math.floor(Math.random() * 3)];
 }
 
-const playerSelection = "rock";
+function playerSelection() {
+  let player = prompt(
+    `Round ${round}: Please enter your choice of either Rock, Paper or Scissors:`
+  );
+  return player;
+}
 
-let round = 1;
-let playerScore = 0;
-let computerScore = 0;
-
-const resetGame = () => {
+function resetGame() {
   playerScore = 0;
   computerScore = 0;
   round = 1;
-};
+}
 
-const checkWinner = () => {
+function checkWinner() {
   if (playerScore > computerScore) {
-    console.log("Player wins the game!");
+    resetGame();
+    return "Player wins the game!";
   } else if (computerScore > playerScore) {
-    console.log("Computer wins the game");
+    resetGame();
+    return "Computer wins the game";
   } else {
-    console.log("The game is a draw!");
+    resetGame();
+    return "The game is a draw!";
   }
-};
+}
 
-const playRound = (player, computer) => {
+function playRound(player, computer) {
   if (
     (player == "rock" && computer == "scissors") ||
     (player == "paper" && computer == "rock") ||
@@ -44,26 +52,20 @@ const playRound = (player, computer) => {
     computerScore = computerScore + 1;
     console.log(`Computer wins Round ${round}`);
   }
-};
+}
 
-const game = () => {
-  for (let i = 0; i < 5; i++) {
-    let player = prompt(
-      `Round ${round}: Please enter your choice of either Rock, Paper or Scissors:`
-    );
-    const playerSanitized = player.toLowerCase();
+function game() {
+  for (round; round < 6; round++) {
     const computerSelection = computerPlay();
+    let player = playerSelection();
 
-    if (choices.indexOf(playerSanitized) !== -1) {
-      playRound(playerSanitized, computerSelection);
-      round = round + 1;
-    } else {
-      player = prompt(
-        `Round ${round}: Choice not valid. Please enter either Rock, Paper or Scissors:`
-      );
+    while (choices.indexOf(player.toLowerCase()) === -1) {
+      player = playerSelection();
     }
-  }
 
-  checkWinner();
-  resetGame();
-};
+    const playerSanitized = player.toLowerCase();
+
+    playRound(playerSanitized, computerSelection);
+  }
+  return console.log(checkWinner());
+}
